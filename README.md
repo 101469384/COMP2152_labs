@@ -1,2 +1,1 @@
-# Sofiia
 # COMP2139
