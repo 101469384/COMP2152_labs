@@ -1,10 +1,48 @@
 # Import the random library to use for the dice later
 import random
 
+from lab04 import health_points
+
+
 # Will the line below print when you import function.py into main.py?
 # print("Inside function.py")
 
-# Hero's Attack Function
+
+#question3
+def collect_loot(loot_options, belt):
+    lootRoll = random.choice(range(1, len(loot_options) + 1))
+    loot = loot_options.pop(lootRoll - 1)
+    belt.append(loot)
+    print("Your belt: ", belt)
+    return [loot_options, belt]
+
+
+#question4
+def use_loot( belt, health_points ):
+    good_loot_options = ["Health Potion", "Leather Boots"]
+    bad_loot_options = ["Poison Potion"]
+
+    first_item = belt.pop(0)
+    if first_item in good_loot_options:
+        health_points = min(6, (health_points + 2))
+        print("You used " + first_item + " to up your health to " + str(health_points))
+    elif first_item in bad_loot_options:
+        health_points = max(0, (health_points - 2))
+        print("You used " + first_item + " to hurt your health to " + str(health_points))
+    else:
+        print("You used " + first_item + " but it's not helpful")
+
+    return belt, health_points
+
+#question6
+def inception_dream(levels ):
+    if levels == 1 :    #base case
+        return 2
+   else:   #recursive case
+        return 1 + inception_dream(levels-1)
+
+
+# Function
 def hero_attacks(combat_strength, m_health_points):
     ascii_image = """
                                 @@   @@ 
@@ -41,7 +79,7 @@ def hero_attacks(combat_strength, m_health_points):
 
 
 # Monster's Attack Function
-def monster_attacks(m_combat_strength, health_points):
+def monster_attacks(m_combat_strength: object, health_points: object) -> object:
     ascii_image2 = """                                                                 
            @@@@ @                           
       (     @*&@  ,                         
